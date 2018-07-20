@@ -1,5 +1,6 @@
 $(function () {
     $("#success-alert").hide();
+    $("#fail-alert").hide();
     $("#tokenModal").modal();
 
     $("#btnSave").on("click", () => {

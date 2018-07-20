@@ -15,10 +15,19 @@ function recastServices(keyword) {
         response.json().then(function (resp) {
             let repoName = " "
             if (resp.results.entities.git_repo !== undefined) {
-             repoName = resp.results.entities.git_repo[0].value;
+                repoName = resp.results.entities.git_repo[0].value;
             }
-            showPopup(resp.results.intents[0].slug,
-                resp.results.intents[0].confidence, repoName);
+
+            if (resp.results.intents[0] !== undefined) {
+                showPopup(resp.results.intents[0].slug,
+                    resp.results.intents[0].confidence, repoName);
+            }
+            else {
+                $("#txtCommand").focus();
+                $("#fail-alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert").slideUp(500);
+                });
+            }
         });
     }).catch(function (error) {
         console.log("Request failure: ", error);
@@ -70,7 +79,11 @@ function showPopup(slug, confidence, repoName) {
             break;
         }
 
-        default:
-            " ";
+        default: {
+            $("#txtCommand").focus();
+            $("#fail-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        }
     }
 }
