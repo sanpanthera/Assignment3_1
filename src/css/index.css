@@ -8621,6 +8621,9 @@ body {
 input::-webkit-calendar-picker-indicator {
   display: none; }
 
+nav i {
+  color: white; }
+
 #container {
   flex-grow: 1;
   overflow-y: auto; }
